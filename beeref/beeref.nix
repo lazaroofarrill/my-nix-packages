@@ -35,20 +35,21 @@ in pkgs.python312Packages.buildPythonApplication {
 
   dontCheckRuntimeDeps = true;
 
-  meta = with pkgs.lib; {
-    description = "Minimal reference image viewer for artists";
-    homepage = "https://github.com/rbreu/beeref";
-    license = licenses.gpl3;
-    # maintainers = with maintainers; [ ];
-  };
-
-  # desktopItems = [
-  #   (pkgs.makeDesktopItem {
-  #     name = "beeref-desktop";
-  #     desktopName = "BeeRef";
-  #     exec = "./bin/beeref";
-  #   })
-  # ];
+  meta = with pkgs.lib;
+    {
+      description = "Minimal reference image viewer for artists";
+      homepage = "https://github.com/rbreu/beeref";
+      license = licenses.gpl3;
+      # maintainers = with maintainers; [ ];
+    } // {
+      desktopItems = [{
+        name = "BeeRef";
+        icon = "BeeRef";
+        exec = "$out/bin/beeref";
+        comment = "BeeRef image viewer";
+        categoreis = [ "Graphics" ];
+      }];
+    };
 
   postInstall = ''
     mkdir -p $out/share/applications
