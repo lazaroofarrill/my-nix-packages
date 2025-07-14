@@ -66,5 +66,11 @@ in pkgs.python312Packages.buildPythonApplication {
       startupNotify = false;
     })
   ];
+
+  postInstall = ''
+    mkdir -p $out/share/pixmaps
+    cp $src/beeref/assets/logo.png $out/share/pixmaps/beeref.png
+    cp $src/beeref/assets/logo.svg $out/share/pixmaps/beeref.svg
+  '';
 }
 
