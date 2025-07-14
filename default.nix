@@ -1,3 +1,3 @@
 { pkgs ? import <nixpkgs> { } }: {
-  beeref = import ./beeref/default.nix { inherit pkgs; };
+  beeref = (import ./beeref/default.nix { inherit pkgs; }).beeref;
 }
