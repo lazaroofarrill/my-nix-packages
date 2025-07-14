@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, copyDesktopItems, makeDesktopItem }:
 let
   pname = "beeref";
   version = "0.3.3";
@@ -22,6 +22,7 @@ in pkgs.python312Packages.buildPythonApplication {
     setuptools
     virtualenv
     qt6.qtbase
+    copyDesktopItems
   ];
   propagatedBuildInputs = with pythonPackages; [
     pyqt6
@@ -51,16 +52,19 @@ in pkgs.python312Packages.buildPythonApplication {
       }];
     };
 
-  postInstall = ''
-    mkdir -p $out/share/applications
-    cat > $out/share/applications/beeref.desktop <<EOF
-    [Desktop Entry]
-    Name=BeeRef
-    Exec=${placeholder "out"}/bin/beeref
-    Icon=beeref
-    Type=application
-    Categories=Graphics;Viewer;
-    EOF
-  '';
+  desktopItems = [
+    (makeDesktopItem {
+      name = "beeref";
+      exec = "beeref";
+      icon = "beeref";
+      desktopName = "BeeRef";
+      genericName = "BeeRef";
+      comment = "BeeRef";
+      categories = [ "Graphics" ];
+      keywords = [ ];
+      mimeTypes = [ ];
+      startupNotify = false;
+    })
+  ];
 }
 
