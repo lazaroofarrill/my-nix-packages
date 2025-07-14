@@ -1,6 +1,7 @@
 { pkgs ? import <nixpkgs> { } }:
-pkgs.mkShell {
-  buildInputs = with pkgs; [ (callPackage ./beeref/default.nix { }) ];
+let myPkgs = import ./default.nix { };
+in pkgs.mkShell {
+  buildInputs = with myPkgs; [ beeref ];
 
   shellHook = ''
     echo "Welcome to the BeeRef development shell!"
