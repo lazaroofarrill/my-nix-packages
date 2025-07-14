@@ -42,12 +42,24 @@ in pkgs.python312Packages.buildPythonApplication {
     # maintainers = with maintainers; [ ];
   };
 
-  desktopItems = [
-    (pkgs.makeDesktopItem {
-      name = "beeref-desktop";
-      desktopName = "BeeRef";
-      exec = "./bin/beeref";
-    })
-  ];
+  # desktopItems = [
+  #   (pkgs.makeDesktopItem {
+  #     name = "beeref-desktop";
+  #     desktopName = "BeeRef";
+  #     exec = "./bin/beeref";
+  #   })
+  # ];
+
+  postInstall = ''
+    mkdir -p $out/share/applications
+    cat > $out/share/applications/beeref.desktop <<EOF
+    [Desktop Entry]
+    Name=BeeRef
+    Exec=${placeholder "out"}/bin/beeref
+    Icon=beeref
+    Type=application
+    Categories=Graphics;Viewer;
+    EOF
+  '';
 }
 
