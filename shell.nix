@@ -7,7 +7,7 @@ let
   myPkgs = import ./default.nix { };
 in pkgs.mkShell {
 
-  buildInputs = with myPkgs; [ beeref ];
+  buildInputs = with myPkgs; [ beeref ugeePackages.m908 ];
 
   shellHook = ''
     echo "Welcome to the BeeRef development shell!"
