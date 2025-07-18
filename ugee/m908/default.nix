@@ -7,7 +7,8 @@ stdenv.mkDerivation {
       "https://ugeecom-download.oss-us-west-1.aliyuncs.com/file/2024/12/ugeeTablet-4.3.4-241031.tar.gz";
   };
 
-  nativeBuildInputs = [ libsForQt5.qt5.wrapQtAppsHook ];
+  nativeBuildInputs =
+    [ libsForQt5.qt5.wrapQtAppsHook libsForQt5.qt5.qtxmlpatterns ];
   buildInputs = [ qt5.qtbase ];
 
   installPhase = builtins.readFile ./install-script.sh;
